@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BullsEye</string>
+    <string name="instruction_text">PUT THE BULLSEYE AS CLOSE AS YOU CAN TO</string>
+    <string name="result_dialog_button_text">Awesome!</string>
+    <string name="result_dialog_tittle">Hello there!</string>
+    <string name="result_dialogue_message">The slider\'s value is %1$d.\n You scored %2$d points in this round</string>
+    <string name="one">1</string>
+    <string name="hit_me">HIT ME</string>
+    <string name="target_text">89</string>
+</resources>
