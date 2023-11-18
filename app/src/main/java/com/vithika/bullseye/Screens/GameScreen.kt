@@ -1,13 +1,17 @@
 package com.vithika.bullseye.Screens
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,6 +20,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +37,9 @@ import kotlin.random.Random
 
 
 @Composable
-fun GameScreen() {
+fun GameScreen(
+    onNavigateToAbout:()-> Unit
+) {
     var alertIsVisible by rememberSaveable { mutableStateOf(false) }
     var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
     fun newTargetValue() = Random.nextInt(1,100)
@@ -91,28 +99,45 @@ fun GameScreen() {
             .padding(16.dp)
     ) {
         Spacer(modifier = Modifier.weight(.5f))
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier.weight(9f)
-        ) {
-            GamePrompt(targetValue = targetValue)
-            TargetSlider(value = sliderValue,
-                valueChanged = { value ->
-                    sliderValue = value
-                })
-            Button(onClick = {
-                alertIsVisible = true;
-                totalScore += pointsForCurrentRound()
-            }) {
-                Text(text = stringResource(R.string.hit_me))
-            }
-            GameDetail(
-                totalScore = totalScore,
-                round = currentRound,
-                modifier = Modifier.fillMaxWidth(),
-                onStartOver = {startNewGame()}
+        Box {
+            Image(modifier = Modifier.fillMaxSize(),
+                contentScale= ContentScale.Crop,
+                painter = painterResource(id = R.drawable.background),
+                contentDescription = stringResource(
+                R.string.background_image
             )
+            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
+                GamePrompt(targetValue = targetValue)
+                TargetSlider(value = sliderValue,
+                    valueChanged = { value ->
+                        sliderValue = value
+                    })
+                Button(
+                    onClick = {
+                        alertIsVisible = true;
+                        totalScore += pointsForCurrentRound()
+                    },
+                    shape = MaterialTheme.shapes.medium,
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    Text(text = stringResource(R.string.hit_me))
+                }
+
+                GameDetail(
+                    totalScore = totalScore,
+                    round = currentRound,
+                    modifier = Modifier.fillMaxWidth(),
+                    onStartOver = { startNewGame() },
+                    onNavigateToAbout = onNavigateToAbout
+                )
+            }
         }
         Spacer(modifier = Modifier.weight(.5f))
         if (alertIsVisible) {
@@ -139,6 +164,6 @@ fun GameScreen() {
 @Composable
 fun GameScreenPreview() {
     BullsEyeTheme {
-        GameScreen()
+        GameScreen(onNavigateToAbout = {})
     }
 }
