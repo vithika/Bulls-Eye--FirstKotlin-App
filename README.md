@@ -3,7 +3,7 @@
 
 Bulls Eye - My First Kotlin App
 
-![ezgif com-video-to-gif-25](https://github.com/vithika/Bulls-Eye--FirstKotlin-App/assets/20993583/b90f8c5b-0dce-4929-8f53-00687fb27452)
+![ezgif com-rotate](https://github.com/vithika/Bulls-Eye--FirstKotlin-App/assets/20993583/c33c96c0-bdc4-497b-9c8d-6857b71bf33b)
 
 ![Screenshot_20231120_113901_BullsEye](https://github.com/vithika/Bulls-Eye--FirstKotlin-App/assets/20993583/29009424-24c4-412a-ac29-83f757228aa4)
 
